@@ -6,6 +6,10 @@ A React band/releases app for self-hosting music
 
 After the various changes and annoyances with existing music sharing platforms, I saw a void that felt it needed filling. A solution for independent musicians to be able to easily release their music without the dependency on the existing platforms, while at the same time providing a low barrier way to do so.
 
+## Example
+
+![Screenshot of Example Site](example.png 'Screenshot of Example Site')
+
 ## Usage
 
 ### Pre-made
