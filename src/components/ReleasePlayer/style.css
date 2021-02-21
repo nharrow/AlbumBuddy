@@ -1,0 +1,31 @@
+.ReleaseCover {
+  /* max-height: 350px;
+    max-width: 350px; */
+  /* height: 100%; */
+  max-width: 100%;
+  height: auto;
+}
+
+.Track:hover {
+  background-color: lightgrey;
+}
+
+#waveform {
+  left: 50px;
+}
+
+#waveform > wave {
+  width: 100%;
+}
+
+#PlayPause {
+  z-index: 1001;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: red;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  border-radius: 25px;
+}

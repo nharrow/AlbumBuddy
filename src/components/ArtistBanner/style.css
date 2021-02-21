@@ -1,0 +1,12 @@
+.ArtistBanner {
+  vertical-align: baseline;
+  color: white;
+  text-shadow: 2px 2px black;
+  background-repeat: no-repeat;
+}
+
+.ArtistBanner > Col > * {
+  vertical-align: text-bottom;
+  bottom: 0px;
+  position: absolute;
+}
