@@ -166,7 +166,7 @@ class App extends Component {
               </Row>
             </Conditional>
           </Col>
-          <Col md={6}>
+          <Col md={8}>
             <Conditional condition={this.state.artist !== ''}>
               <ArtistBanner
                 artist={this.state.artist}
