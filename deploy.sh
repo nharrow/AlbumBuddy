@@ -33,7 +33,7 @@ echo "Adding files..."
 git add .
 
 echo "Committing files..."
-git commit -m $(date '+%Y-%m-%d %H:%M Update')
+git commit -m "$(date '+%Y-%m-%d %H:%M Update')"
 
 echo "Pushing new release..."
 git push -u origin release
