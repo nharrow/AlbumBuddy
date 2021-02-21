@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Row, Col, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far, faPlayCircle } from '@fortawesome/free-regular-svg-icons'
+import { fas, faDownload } from '@fortawesome/free-solid-svg-icons'
 
 import WaveSurfer from 'wavesurfer.js'
+
+import { saveAs } from 'file-saver'
 
 import Conditional from '../Conditional'
 import Loading from '../Loading'
 
 import './style.css'
 
-library.add(far, faPlayCircle)
+library.add(far, faPlayCircle, fas, faDownload)
 
 function TrackList ({
   catalogue,
@@ -31,12 +34,26 @@ function TrackList ({
           ? <b>{trackInfo.title}</b>
           : trackInfo.title
 
+      const DownloadLinks = trackInfo.files.map((trackFile, idx) => {
+        const trackFileExtension = trackFile.split('.').slice(-1)[0].toUpperCase()
+        const trackFileName = trackFile.split('/').slice(-1)[0]
+
+        return (<Button key={idx} variant="info" className="TrackButton" onClick={() => { saveAs(trackFile, trackFileName) }}>{trackFileExtension}</Button>)
+      })
+
       return (
-        <ListGroupItem key={idx} className="Track" onClick={selectTrackHandler} data-playingid={idx}>
-          <FontAwesomeIcon
-            icon={['far', 'play-circle']}
-          />{' '}
-          {trackTitle}
+        <ListGroupItem key={idx} className="Track">
+          <Row className="snug">
+            <Col onClick={selectTrackHandler} data-playingid={idx} xs={12}>
+              <FontAwesomeIcon
+                icon={['far', 'play-circle']}
+              />{' '}
+              {trackTitle}
+            </Col>
+            <Col xs={12} lg={4}>
+              <span className="pull-right"><FontAwesomeIcon icon={['fa', 'download'] } />&nbsp;{DownloadLinks}</span>
+            </Col>
+          </Row>
         </ListGroupItem>
       )
     }
