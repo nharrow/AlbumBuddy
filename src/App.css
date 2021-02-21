@@ -1,3 +1,11 @@
 .row {
   padding-bottom: 15px;
 }
+
+.row.snug {
+  padding-bottom: 0px;
+}
+
+.pull-right {
+  float: right;
+}
