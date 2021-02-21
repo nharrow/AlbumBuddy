@@ -28,3 +28,4 @@ public/music
 test/**
 .eslintcache
 buddy.json
+custom.css
