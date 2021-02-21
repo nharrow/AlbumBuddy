@@ -32,8 +32,5 @@ cd ..
 echo "Adding files..."
 git add .
 
-echo "Committing files..."
-git commit -m "$(date '+%Y-%m-%d %H:%M Update')"
-
-echo "Pushing new release..."
-git push -u origin release
+echo "Committing and pushing if needed..."
+git diff --quiet && git diff --staged --quiet || (git commit -m "$(date '+%Y-%m-%d %H:%M Update')" && git push -u origin release)
