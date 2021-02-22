@@ -246,74 +246,54 @@ class ReleasePlayer extends Component {
           </Col>
           <Col xs={12} sm={12} md={4} lg={4}>
             <Row>
-              <Col>
-                <img
-                  className='ReleaseCover'
-                  alt='Release Cover'
-                  src={releaseInfo.cover}
-                />
-              </Col>
+              <img
+                className='ReleaseCover'
+                alt='Release Cover'
+                src={releaseInfo.cover}
+              />
             </Row>
             <Conditional condition={releaseInfo.info !== undefined}>
               <Row>
-                <Col>
-                  <b>Release Info</b>
-                </Col>
+                <b>Release Info</b>
               </Row>
               <Row>
-                <Col>
-                  {releaseInfo.info}
-                </Col>
+                {releaseInfo.info}
               </Row>
             </Conditional>
             <Conditional condition={releaseInfo.links !== undefined && typeof releaseInfo.links === 'object' && Object.keys(releaseInfo.links).length > 0}>
               <Row>
-                <Col>
-                  <b>Release Links</b>
-                </Col>
+                <b>{this.props.options.release_links}</b>
               </Row>
               <Row>
-                <Col>
-                  <Links links={releaseInfo.links} />
-                </Col>
+                <Links links={releaseInfo.links} />
               </Row>
             </Conditional>
             <Conditional condition={hasCredits === true}>
               <Row>
-                <Col>
-                  <b>{this.state.options.credits}</b>
-                </Col>
+                <b>{this.props.options.credits}</b>
               </Row>
               <Conditional condition={hasEngineeringCredits}>
                 <Row>
-                  <Col>
-                    <b>{this.state.options['credits.engineering']}</b><br />
-                    <i>{credits.engineering.join(', ')}</i>
-                  </Col>
+                  <b>{this.props.options.credits_engineering}</b><br />
+                  <i>{credits.engineering.join(', ')}</i>
                 </Row>
               </Conditional>
               <Conditional condition={hasPerformanceCredits}>
                 <Row>
-                  <Col>
-                    <b>{this.state.options['credits.performance']}</b><br />
-                    <i>{credits.performance.join(', ')}</i>
-                  </Col>
+                  <b>{this.props.options.credits_performance}</b><br />
+                  <i>{credits.performance.join(', ')}</i>
                 </Row>
               </Conditional>
               <Conditional condition={hasProductionCredits}>
                 <Row>
-                  <Col>
-                    <b>{this.state.options['credits.production']}</b><br />
-                    <i>{credits.production.join(', ')}</i>
-                  </Col>
+                  <b>{this.props.options.credits_production}</b><br />
+                  <i>{credits.production.join(', ')}</i>
                 </Row>
               </Conditional>
               <Conditional condition={hasWritingCredits}>
                 <Row>
-                  <Col>
-                    <b>{this.state.options['credits.writing']}</b><br />
-                    <i>{credits.writing.join(', ')}</i>
-                  </Col>
+                  <b>{this.props.options.credits_writing}</b><br />
+                  <i>{credits.writing.join(', ')}</i>
                 </Row>
               </Conditional>
             </Conditional>
@@ -327,7 +307,8 @@ class ReleasePlayer extends Component {
 ReleasePlayer.propTypes = {
   catalogue: PropTypes.object.isRequired,
   artist: PropTypes.string.isRequired,
-  release: PropTypes.string.isRequired
+  release: PropTypes.string.isRequired,
+  options: PropTypes.object.isRequired
 }
 
 export default ReleasePlayer

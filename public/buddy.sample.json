@@ -6,9 +6,11 @@
   "location": "Location",
   "links": "Links",
   "logo": "content/Global Identity Crisis Logo - xs.png",
+  "release_info": "Release Info",
+  "release_links": "Release Links",
   "credits": "Credits",
-  "credits.engineering": "Engineering",
-  "credits.performance": "Performance",
-  "credits.production": "Production",
-  "credits.writing": "Writing"
+  "credits_engineering": "Engineering",
+  "credits_performance": "Performance",
+  "credits_production": "Production",
+  "credits_writing": "Writing"
 }
