@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver'
 
 import Conditional from '../Conditional'
 import Loading from '../Loading'
+import Links from '../Links'
 
 import './style.css'
 
@@ -44,13 +45,13 @@ function TrackList ({
       return (
         <ListGroupItem key={idx} className="Track">
           <Row className="snug">
-            <Col onClick={selectTrackHandler} data-playingid={idx} xs={12}>
+            <Col onClick={selectTrackHandler} data-playingid={idx} md={12} lg={8}>
               <FontAwesomeIcon
                 icon={['far', 'play-circle']}
               />{' '}
               {trackTitle}
             </Col>
-            <Col xs={12} lg={4}>
+            <Col xs={12} sm={12} md={12} lg={4}>
               <span className="pull-right"><FontAwesomeIcon icon={['fa', 'download'] } />&nbsp;{DownloadLinks}</span>
             </Col>
           </Row>
@@ -73,7 +74,14 @@ class ReleasePlayer extends Component {
         catalogue: {},
         playing: false,
         loading: true,
-        tracks: []
+        tracks: [],
+        info: '',
+        credits: {
+          writing: [],
+          performance: [],
+          production: [],
+          engineering: []
+        }
       },
       ...props
     }
@@ -95,13 +103,21 @@ class ReleasePlayer extends Component {
       cursorWidth: 0
     })
 
-    const tracks = this.props.catalogue[this.props.artist].releases[this.props.release].tracks
+    const release = this.props.catalogue[this.props.artist].releases[this.props.release]
 
-    this.setState({ tracks })
+    const tracks = release.tracks
 
-    this.wavesurfer.load(
-      tracks[this.state.playingid].files[0]
-    )
+    const info = release.info !== undefined ? release.info : ''
+    const credits = release.credits !== undefined ? release.credits : { writing: [], production: [], engineering: [] }
+
+    let stateUpdate = {}
+    stateUpdate = { ...stateUpdate, ...{ tracks, info, credits } }
+
+    this.setState(stateUpdate)
+
+    // this.wavesurfer.load(
+    //   tracks[this.state.playingid].files[0]
+    // )
 
     this.wavesurfer.on('ready', () => {
       this.wavesurfer.play()
@@ -179,6 +195,18 @@ class ReleasePlayer extends Component {
       this.props.release
     ]
 
+    const credits = {}
+    credits.engineering = (releaseInfo.credits !== undefined && releaseInfo.credits.engineering !== undefined) ? releaseInfo.credits.engineering : []
+    credits.performance = (releaseInfo.credits !== undefined && releaseInfo.credits.performance !== undefined) ? releaseInfo.credits.performance : []
+    credits.production = (releaseInfo.credits !== undefined && releaseInfo.credits.production !== undefined) ? releaseInfo.credits.production : []
+    credits.writing = (releaseInfo.credits !== undefined && releaseInfo.credits.writing !== undefined) ? releaseInfo.credits.writing : []
+    const hasEngineeringCredits = credits.engineering.length > 0
+    const hasPerformanceCredits = credits.performance.length > 0
+    const hasProductionCredits = credits.production.length > 0
+    const hasWritingCredits = credits.writing.length > 0
+
+    const hasCredits = hasEngineeringCredits || hasPerformanceCredits || hasProductionCredits || hasWritingCredits
+
     return (
       <>
         <Row>
@@ -217,11 +245,78 @@ class ReleasePlayer extends Component {
             </Row>
           </Col>
           <Col xs={12} sm={12} md={4} lg={4}>
-            <img
-              className='ReleaseCover'
-              alt='Release Cover'
-              src={releaseInfo.cover}
-            />
+            <Row>
+              <Col>
+                <img
+                  className='ReleaseCover'
+                  alt='Release Cover'
+                  src={releaseInfo.cover}
+                />
+              </Col>
+            </Row>
+            <Conditional condition={releaseInfo.info !== undefined}>
+              <Row>
+                <Col>
+                  <b>Release Info</b>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  {releaseInfo.info}
+                </Col>
+              </Row>
+            </Conditional>
+            <Conditional condition={releaseInfo.links !== undefined && typeof releaseInfo.links === 'object' && Object.keys(releaseInfo.links).length > 0}>
+              <Row>
+                <Col>
+                  <b>Release Links</b>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Links links={releaseInfo.links} />
+                </Col>
+              </Row>
+            </Conditional>
+            <Conditional condition={hasCredits === true}>
+              <Row>
+                <Col>
+                  <b>{this.state.options.credits}</b>
+                </Col>
+              </Row>
+              <Conditional condition={hasEngineeringCredits}>
+                <Row>
+                  <Col>
+                    <b>{this.state.options['credits.engineering']}</b><br />
+                    <i>{credits.engineering.join(', ')}</i>
+                  </Col>
+                </Row>
+              </Conditional>
+              <Conditional condition={hasPerformanceCredits}>
+                <Row>
+                  <Col>
+                    <b>{this.state.options['credits.performance']}</b><br />
+                    <i>{credits.performance.join(', ')}</i>
+                  </Col>
+                </Row>
+              </Conditional>
+              <Conditional condition={hasProductionCredits}>
+                <Row>
+                  <Col>
+                    <b>{this.state.options['credits.production']}</b><br />
+                    <i>{credits.production.join(', ')}</i>
+                  </Col>
+                </Row>
+              </Conditional>
+              <Conditional condition={hasWritingCredits}>
+                <Row>
+                  <Col>
+                    <b>{this.state.options['credits.writing']}</b><br />
+                    <i>{credits.writing.join(', ')}</i>
+                  </Col>
+                </Row>
+              </Conditional>
+            </Conditional>
           </Col>
         </Row>
       </>

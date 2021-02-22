@@ -198,6 +198,7 @@ class App extends Component {
                   artist={this.state.artist}
                   release={this.state.release}
                   catalogue={this.state.catalogue}
+                  options={this.state.options}
                 />
               </Conditional>
             </Conditional>
