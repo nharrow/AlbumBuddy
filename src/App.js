@@ -104,7 +104,7 @@ class App extends Component {
     if (this.state.loading) return <Loading />
 
     return (
-      <Container>
+      <Container fluid="lg">
         <Helmet>
           <title>{this.state.options.title}</title>
         </Helmet>
