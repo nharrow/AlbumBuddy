@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 
-import { Container, Row, Col, ListGroup, Card } from 'react-bootstrap'
+import { Container, Row, Col, ListGroup, Card, Image } from 'react-bootstrap'
 
 import axios from 'axios'
 
@@ -112,7 +112,7 @@ class App extends Component {
         </Helmet>
         <Row>
           <Col>
-            <h1>{this.state.options.title !== undefined ? this.state.options.title : 'AlbumBuddy'}</h1>
+            <h1><Conditional condition={this.state.options.logo !== undefined}><Image src={this.state.options.logo} /></Conditional> {this.state.options.title !== undefined ? this.state.options.title : 'AlbumBuddy'}</h1>
           </Col>
         </Row>
         <Row>
