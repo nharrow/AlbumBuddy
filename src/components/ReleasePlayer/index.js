@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Row, Col, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import { Row, Col, ListGroup, ListGroupItem, Badge } from 'react-bootstrap'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -39,7 +39,7 @@ function TrackList ({
         const trackFileExtension = trackFile.split('.').slice(-1)[0].toUpperCase()
         const trackFileName = trackFile.split('/').slice(-1)[0]
 
-        return (<Button key={idx} variant="info" className="TrackButton" onClick={() => { saveAs(trackFile, trackFileName) }}>{trackFileExtension}</Button>)
+        return (<Badge key={idx} variant="info" className="TrackButton" onClick={() => { saveAs(trackFile, trackFileName) }}>{trackFileExtension}</Badge>)
       })
 
       return (
