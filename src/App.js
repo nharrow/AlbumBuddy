@@ -35,20 +35,40 @@ class App extends Component {
   }
 
   async componentDidMount () {
-    let loading = this.state.loading
+    let updateState = {}
+
+    updateState.loading = this.state.loading
     const appOptionsResult = await axios.get('/buddy.json')
 
-    const options = appOptionsResult.data
+    updateState.options = appOptionsResult.data
 
     const catalogueResult = await axios.get('/catalogue.json')
 
-    let catalogue = catalogueResult.data
+    const catalogue = catalogueResult.data
     const artists = Object.keys(catalogueResult.data)
-    catalogue = { ...catalogue, ...{ artists } }
+    updateState.catalogue = { ...catalogue, ...{ artists } }
 
-    loading = false
+    if (artists.length === 1) {
+      const artist = artists[0]
 
-    this.setState({ catalogue, artists, options, loading })
+      updateState = {
+        ...updateState,
+        ...{
+          artist,
+          artists,
+          bio: catalogue[artist].bio,
+          location: catalogue[artist].location,
+          links: catalogue[artist].links
+        },
+        ...catalogue[artist]
+      }
+    }
+
+    updateState.loading = false
+
+    console.log('App', 'componentDidMount', 'updateState:', updateState)
+
+    this.setState(updateState)
   }
 
   selectArtist (artist) {
@@ -92,30 +112,32 @@ class App extends Component {
         </Helmet>
         <Row>
           <Col>
-            <h1>{this.state.options.title}</h1>
+            <h1>{this.state.options.title !== undefined ? this.state.options.title : 'AlbumBuddy'}</h1>
           </Col>
         </Row>
         <Row>
           <Col md={4} lg={2}>
-            <Row>
-              <Col>
-                <Card>
-                  <Card.Header>
-                    <b>{this.state.options.roster}</b>
-                  </Card.Header>
-                </Card>
-                <ArtistsList
-                  artist={this.state.artist}
-                  artists={this.state.artists}
-                  catalogue={this.state.catalogue}
-                  selectArtist={this.selectArtist}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-              </Col>
-            </Row>
+            <Conditional condition={this.state.artists.length > 1}>
+              <Row>
+                <Col>
+                  <Card>
+                    <Card.Header>
+                      <b>{this.state.options.roster}</b>
+                    </Card.Header>
+                  </Card>
+                  <ArtistsList
+                    artist={this.state.artist}
+                    artists={this.state.artists}
+                    catalogue={this.state.catalogue}
+                    selectArtist={this.selectArtist}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                </Col>
+              </Row>
+            </Conditional>
             <Conditional condition={this.state.artist !== ''}>
               <Conditional condition={this.state.bio !== ''}>
                 <Row>
