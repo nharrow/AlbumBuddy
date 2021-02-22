@@ -9,7 +9,7 @@ import Conditional from './components/Conditional'
 import Loading from './components/Loading'
 import ArtistBanner from './components/ArtistBanner'
 import ArtistsList from './components/ArtistsList'
-import ArtistLinks from './components/ArtistLinks'
+import Links from './components/Links'
 import Releases from './components/Releases'
 import ReleasePlayer from './components/ReleasePlayer'
 
@@ -66,8 +66,6 @@ class App extends Component {
 
     updateState.loading = false
 
-    console.log('App', 'componentDidMount', 'updateState:', updateState)
-
     this.setState(updateState)
   }
 
@@ -106,7 +104,7 @@ class App extends Component {
     if (this.state.loading) return <Loading />
 
     return (
-      <Container fluid>
+      <Container>
         <Helmet>
           <title>{this.state.options.title}</title>
         </Helmet>
@@ -116,7 +114,7 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col md={4} lg={2}>
+          <Col md={4} lg={3}>
             <Conditional condition={this.state.artists.length > 1}>
               <Row>
                 <Col>
@@ -162,7 +160,7 @@ class App extends Component {
                           <Row>
                             <Col>
                               <b>{this.state.options.links}:</b><br />
-                              <ArtistLinks links={this.state.links}/>
+                              <Links links={this.state.links}/>
                             </Col>
                           </Row>
                         </Conditional>
@@ -188,7 +186,7 @@ class App extends Component {
               </Row>
             </Conditional>
           </Col>
-          <Col md={8}>
+          <Col md={8} lg={9}>
             <Conditional condition={this.state.artist !== ''}>
               <ArtistBanner
                 artist={this.state.artist}

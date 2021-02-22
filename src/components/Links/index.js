@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class ArtistLinks extends Component {
+class Links extends Component {
   render () {
     const Links = Object.entries(this.props.links).map(([title, link]) => {
-      return (<li key={title}><a href={link}>{title}</a><br /></li>)
+      return (<li key={title}><a href={link}>{title}</a></li>)
     })
 
     return (<ul>{Links}</ul>)
   }
 }
 
-ArtistLinks.propTypes = {
+Links.propTypes = {
   links: PropTypes.object.isRequired
 }
 
-export default ArtistLinks
+export default Links
