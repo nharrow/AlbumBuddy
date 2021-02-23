@@ -1,8 +1,16 @@
 {
-  "title": "Album Buddy",
+  "title": "Global Identity Crisis",
   "roster": "Roster",
   "releases": "Releases",
-  "artist_info": "Artist Info",
+  "artist_info": "Global Identity Crisis",
   "location": "Location",
-  "links": "Links"
+  "links": "Links",
+  "logo": "content/Global Identity Crisis Logo - xs.png",
+  "release_info": "Release Info",
+  "release_links": "Release Links",
+  "credits": "Credits",
+  "credits_engineering": "Engineering",
+  "credits_performance": "Performance",
+  "credits_production": "Production",
+  "credits_writing": "Writing"
 }

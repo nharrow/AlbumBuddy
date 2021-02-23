@@ -5,15 +5,22 @@
     "bio": "Making music as Global Identity Crisis, Kranic embraces the weird side of music and himself. Idk. I'm terrible at writing bios.",
     "location": "Vancouver, BC",
     "links": {
-      "Twitter": "https://twitter.com/GlblIdntCrss"
+      "Twitter": "https://twitter.com/GlblIdntCrss",
+      "Kranic": "https://twitter.com/DJKranic",
+      "Kranic's Mixes": "https://mixcloud.com/DJKranic"
     },
     "releases": {
       "unload-reload": {
         "title": "Unload / Reload",
         "cover": "music/GIC - Unload - Reload/Unload - Reload - Cover.png",
         "links": {
-          "Buy": "https://globalidentitycrisis.bandcamp.com/album/unload-reload"
+          "Bandcamp": "https://globalidentitycrisis.bandcamp.com/album/unload-reload"
         },
+        "credits": {
+          "writing": ["Global Identity Crisis"],
+          "production": ["Global Identity Crisis"]
+        },
+        "info": "This album was the 2020 submission for NaSoAlMo",
         "tracks": [
           {
             "title": "20 Minutes Until Credits",
@@ -48,7 +55,8 @@
             "files": [
               "music/GIC - Unload - Reload/03 - Global Identity Crisis - Osthyvel.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Osthyvel.wav"
-            ]
+            ],
+            "info": "In this track, I channeled my inner Aphex Twin"
           },
           {
             "title": "Seceda",
