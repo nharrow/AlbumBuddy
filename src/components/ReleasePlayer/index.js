@@ -44,7 +44,7 @@ function TrackList ({
 
       return (
         <ListGroupItem key={idx} className="Track">
-          <Row className="snug">
+          <Row className={trackInfo.info === undefined ? 'snug' : ''}>
             <Col onClick={selectTrackHandler} data-playingid={idx} md={12} lg={8}>
               <FontAwesomeIcon
                 icon={['far', 'play-circle']}
@@ -55,6 +55,13 @@ function TrackList ({
               <span className="pull-right"><FontAwesomeIcon icon={['fa', 'download'] } />&nbsp;{DownloadLinks}</span>
             </Col>
           </Row>
+          <Conditional condition={trackInfo.info !== undefined}>
+            <Row className="snug track-info">
+              <Col xs={12}>
+                <quote>{trackInfo.info}</quote>
+              </Col>
+            </Row>
+          </Conditional>
         </ListGroupItem>
       )
     }
@@ -269,30 +276,38 @@ class ReleasePlayer extends Component {
               </Row>
             </Conditional>
             <Conditional condition={hasCredits === true}>
-              <Row>
+              <Row className="snug">
                 <b>{this.props.options.credits}</b>
               </Row>
               <Conditional condition={hasEngineeringCredits}>
-                <Row>
-                  <b>{this.props.options.credits_engineering}</b><br />
+                <Row className="snug">
+                  <b>{this.props.options.credits_engineering}</b>
+                </Row>
+                <Row className="snug">
                   <i>{credits.engineering.join(', ')}</i>
                 </Row>
               </Conditional>
               <Conditional condition={hasPerformanceCredits}>
-                <Row>
-                  <b>{this.props.options.credits_performance}</b><br />
+                <Row className="snug">
+                  <b>{this.props.options.credits_performance}</b>
+                </Row>
+                <Row className="snug">
                   <i>{credits.performance.join(', ')}</i>
                 </Row>
               </Conditional>
               <Conditional condition={hasProductionCredits}>
-                <Row>
-                  <b>{this.props.options.credits_production}</b><br />
+                <Row className="snug">
+                  <b>{this.props.options.credits_production}</b>
+                </Row>
+                <Row className="snug">
                   <i>{credits.production.join(', ')}</i>
                 </Row>
               </Conditional>
               <Conditional condition={hasWritingCredits}>
-                <Row>
-                  <b>{this.props.options.credits_writing}</b><br />
+                <Row className="snug">
+                  <b>{this.props.options.credits_writing}</b>
+                </Row>
+                <Row className="snug">
                   <i>{credits.writing.join(', ')}</i>
                 </Row>
               </Conditional>

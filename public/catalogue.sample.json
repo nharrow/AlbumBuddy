@@ -14,8 +14,13 @@
         "title": "Unload / Reload",
         "cover": "music/GIC - Unload - Reload/Unload - Reload - Cover.png",
         "links": {
-          "Buy": "https://globalidentitycrisis.bandcamp.com/album/unload-reload"
+          "Bandcamp": "https://globalidentitycrisis.bandcamp.com/album/unload-reload"
         },
+        "credits": {
+          "writing": ["Global Identity Crisis"],
+          "production": ["Global Identity Crisis"]
+        },
+        "info": "This album was the 2020 submission for NaSoAlMo",
         "tracks": [
           {
             "title": "20 Minutes Until Credits",
@@ -50,7 +55,8 @@
             "files": [
               "music/GIC - Unload - Reload/03 - Global Identity Crisis - Osthyvel.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Osthyvel.wav"
-            ]
+            ],
+            "info": "In this track, I channeled my inner Aphex Twin"
           },
           {
             "title": "Seceda",
