@@ -52,7 +52,7 @@ function TrackList ({
               {trackTitle}
             </Col>
             <Col xs={12} sm={12} md={12} lg={4}>
-              <span className="pull-right"><FontAwesomeIcon icon={['fa', 'download'] } />&nbsp;{DownloadLinks}</span>
+              <span className="pull-right"><FontAwesomeIcon icon={['fa', 'download']} />&nbsp;{DownloadLinks}</span>
             </Col>
           </Row>
           <Conditional condition={trackInfo.info !== undefined}>
@@ -122,9 +122,9 @@ class ReleasePlayer extends Component {
 
     this.setState(stateUpdate)
 
-    // this.wavesurfer.load(
-    //   tracks[this.state.playingid].files[0]
-    // )
+    this.wavesurfer.load(
+      tracks[this.state.playingid].files[0]
+    )
 
     this.wavesurfer.on('ready', () => {
       this.wavesurfer.play()
