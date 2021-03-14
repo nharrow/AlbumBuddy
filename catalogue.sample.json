@@ -17,42 +17,61 @@
           "Bandcamp": "https://globalidentitycrisis.bandcamp.com/album/unload-reload"
         },
         "credits": {
-          "writing": ["Global Identity Crisis"],
-          "production": ["Global Identity Crisis"]
+          "writing": [
+            "Global Identity Crisis"
+          ],
+          "production": [
+            "Global Identity Crisis"
+          ]
         },
         "info": "This album was the 2020 submission for NaSoAlMo",
         "tracks": [
           {
             "title": "20 Minutes Until Credits",
-            "files": [
+            "stream": {
+              "default": "music/GIC - Unload - Reload/05 - Global Identity Crisis - 20 Minutes Until Credit.mp3"
+            },
+            "downloads": [
               "music/GIC - Unload - Reload/05 - Global Identity Crisis - 20 Minutes Until Credit.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - 20 Minutes Until Credits.wav"
             ]
           },
           {
             "title": "Baking Bread",
-            "files": [
+            "stream": {
+              "default": "music/GIC - Unload - Reload/06 - Global Identity Crisis - Baking Bread.mp3"
+            },
+            "downloads": [
               "music/GIC - Unload - Reload/06 - Global Identity Crisis - Baking Bread.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Baking Bread.wav"
             ]
           },
           {
             "title": "Iterate - Part 1",
-            "files": [
+            "stream": {
+              "default": "music/GIC - Unload - Reload/01 - Global Identity Crisis - Iterate - Part 1.mp3"
+            },
+            "downloads": [
               "music/GIC - Unload - Reload/01 - Global Identity Crisis - Iterate - Part 1.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Iterate - Part 1.wav"
             ]
           },
           {
             "title": "Iterate - Part 2",
-            "files": [
+            "stream": {
+              "default": "music/GIC - Unload - Reload/02 - Global Identity Crisis - Iterate - Part 2.mp3"
+            },
+            "downloads": [
               "music/GIC - Unload - Reload/02 - Global Identity Crisis - Iterate - Part 2.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Iterate - Part 2.wav"
             ]
           },
           {
             "title": "Osthyvel",
-            "files": [
+            "stream": {
+              "default": "music/GIC - Unload - Reload/03 - Global Identity Crisis - Osthyvel.mp3"
+            },
+            "downloads": [
               "music/GIC - Unload - Reload/03 - Global Identity Crisis - Osthyvel.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Osthyvel.wav"
             ],
@@ -60,14 +79,20 @@
           },
           {
             "title": "Seceda",
-            "files": [
+            "stream": {
+              "default": "music/GIC - Unload - Reload/07 - Global Identity Crisis - Seceda.mp3"
+            },
+            "downloads": [
               "music/GIC - Unload - Reload/07 - Global Identity Crisis - Seceda.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Seceda.wav"
             ]
           },
           {
             "title": "Stuck on Mars",
-            "files": [
+            "stream": {
+              "default": "music/GIC - Unload - Reload/04 - Global Identity Crisis - Stuck on Mars.mp3"
+            },
+            "downloads": [
               "music/GIC - Unload - Reload/04 - Global Identity Crisis - Stuck on Mars.mp3",
               "music/GIC - Unload - Reload/Global Identity Crisis - Stuck on Mars.wav"
             ]
