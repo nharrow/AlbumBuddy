@@ -12,6 +12,8 @@ import WaveSurfer from 'wavesurfer.js'
 
 import { saveAs } from 'file-saver'
 
+import axios from 'axios'
+
 import Conditional from '../Conditional'
 import Loading from '../Loading'
 import Links from '../Links'
@@ -62,7 +64,7 @@ function TrackList ({
           <Conditional condition={trackInfo.info !== undefined}>
             <Row className="snug track-info">
               <Col xs={12}>
-                <quote>{trackInfo.info}</quote>
+                <q>{trackInfo.info}</q>
               </Col>
             </Row>
           </Conditional>
@@ -98,6 +100,7 @@ class ReleasePlayer extends Component {
       ...props
     }
 
+    this.loadTrack = this.loadTrack.bind(this)
     this.selectTrackHandler = this.selectTrackHandler.bind(this)
     this.playPauseHandler = this.playPauseHandler.bind(this)
 
@@ -127,9 +130,7 @@ class ReleasePlayer extends Component {
 
     this.setState(stateUpdate)
 
-    this.wavesurfer.load(
-      tracks[this.state.playingid].stream[this.state.quality]
-    )
+    this.loadTrack(tracks[this.state.playingid].stream[this.state.quality])
 
     this.wavesurfer.on('ready', () => {
       this.wavesurfer.play()
@@ -147,7 +148,7 @@ class ReleasePlayer extends Component {
 
       const playingid = ((this.state.playingid + 1) % this.state.tracks.length)
 
-      this.wavesurfer.load(tracks[playingid].stream[this.state.quality])
+      this.loadTrack(tracks[playingid].stream[this.state.quality])
 
       this.setState({ playingid: playingid, playing: true })
     })
@@ -167,6 +168,20 @@ class ReleasePlayer extends Component {
     this.wavesurfer.destroy()
   }
 
+  async loadTrack (uri) {
+    let waveform = null
+
+    try {
+      waveform = await axios.get(uri + '.json')
+
+      this.wavesurfer.load(uri, waveform.data.data)
+    } catch (e) {
+      console.log('Error loading waveform data. Skipping...')
+
+      this.wavesurfer.load(uri)
+    }
+  }
+
   selectTrackHandler (e) {
     const playingidSrc = e.target.dataset.playingid
     const playingid = parseInt(playingidSrc)
@@ -177,7 +192,7 @@ class ReleasePlayer extends Component {
     } else if (this.props.catalogue[this.props.artist].releases[this.props.release].tracks[playingid] !== undefined && playingid !== this.state.playingid) {
       this.wavesurfer.pause()
       this.setState({ loading: true })
-      this.wavesurfer.load(this.state.tracks[playingid].stream[this.state.quality])
+      this.loadTrack(this.state.tracks[playingid].stream[this.state.quality])
       this.setState({ playingid: playingid, playing: true })
     }
   }
