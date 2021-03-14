@@ -35,7 +35,7 @@ function TrackList ({
           ? <b>{trackInfo.title}</b>
           : trackInfo.title
 
-      const DownloadLinks = trackInfo.files.map((trackFile, idx) => {
+      const DownloadLinks = trackInfo.downloads.map((trackFile, idx) => {
         const trackFileExtension = trackFile.split('.').slice(-1)[0].toUpperCase()
         const trackFileName = trackFile.split('/').slice(-1)[0]
 
@@ -88,7 +88,8 @@ class ReleasePlayer extends Component {
           performance: [],
           production: [],
           engineering: []
-        }
+        },
+        quality: 'default'
       },
       ...props
     }
@@ -123,7 +124,7 @@ class ReleasePlayer extends Component {
     this.setState(stateUpdate)
 
     this.wavesurfer.load(
-      tracks[this.state.playingid].files[0]
+      tracks[this.state.playingid].stream[this.state.quality]
     )
 
     this.wavesurfer.on('ready', () => {
@@ -142,9 +143,7 @@ class ReleasePlayer extends Component {
 
       const playingid = ((this.state.playingid + 1) % this.state.tracks.length)
 
-      this.wavesurfer.load(
-        tracks[playingid].files[0]
-      )
+      this.wavesurfer.load(tracks[playingid].stream[this.state.quality])
 
       this.setState({ playingid: playingid, playing: true })
     })
@@ -171,16 +170,10 @@ class ReleasePlayer extends Component {
     if (playingidSrc === undefined) {
       this.wavesurfer.playPause()
       this.setState({ playing: this.wavesurfer.isPlaying() })
-    } else if (
-      this.props.catalogue[this.props.artist].releases[this.props.release]
-        .tracks[playingid] !== undefined &&
-      playingid !== this.state.playingid
-    ) {
+    } else if (this.props.catalogue[this.props.artist].releases[this.props.release].tracks[playingid] !== undefined && playingid !== this.state.playingid) {
       this.wavesurfer.pause()
       this.setState({ loading: true })
-      this.wavesurfer.load(
-        this.state.tracks[playingid].files[0]
-      )
+      this.wavesurfer.load(this.state.tracks[playingid].stream[this.state.quality])
       this.setState({ playingid: playingid, playing: true })
     }
   }
@@ -191,16 +184,9 @@ class ReleasePlayer extends Component {
   }
 
   render () {
-    if (
-      this.props.artist === undefined ||
-      this.props.release === undefined ||
-      this.props.artist === '' ||
-      this.props.release === ''
-    ) { return <></> }
+    if (this.props.artist === undefined || this.props.release === undefined || this.props.artist === '' || this.props.release === '') { return <></> }
 
-    const releaseInfo = this.props.catalogue[this.props.artist].releases[
-      this.props.release
-    ]
+    const releaseInfo = this.props.catalogue[this.props.artist].releases[this.props.release]
 
     const credits = {}
     credits.engineering = (releaseInfo.credits !== undefined && releaseInfo.credits.engineering !== undefined) ? releaseInfo.credits.engineering : []
@@ -222,11 +208,7 @@ class ReleasePlayer extends Component {
             <Row>
               <Col>
                 <div id="PlayPause">
-                  <FontAwesomeIcon
-                    icon={['far', (this.state.playing === true ? 'pause-circle' : 'play-circle')]}
-                    size="3x"
-                    onClick={this.playPauseHandler}
-                  />
+                  <FontAwesomeIcon icon={['far', (this.state.playing === true ? 'pause-circle' : 'play-circle')]} size="3x" onClick={this.playPauseHandler} />
                 </div>
                 <div id='waveform' ref={this.waveform}>
                   <Conditional condition={this.state.loading}>
@@ -238,26 +220,14 @@ class ReleasePlayer extends Component {
             <Row>
               <Col>
                 <ListGroup>
-
-                  <TrackList
-                    artist={this.props.artist}
-                    release={this.props.release}
-                    catalogue={this.props.catalogue}
-                    playingid={this.state.playingid}
-                    tracks={this.state.tracks}
-                    selectTrackHandler={this.selectTrackHandler}
-                  />
+                  <TrackList artist={this.props.artist} release={this.props.release} catalogue={this.props.catalogue} playingid={this.state.playingid} tracks={this.state.tracks} selectTrackHandler={this.selectTrackHandler} />
                 </ListGroup>
               </Col>
             </Row>
           </Col>
           <Col xs={12} sm={12} md={4} lg={4}>
             <Row>
-              <img
-                className='ReleaseCover'
-                alt='Release Cover'
-                src={releaseInfo.cover}
-              />
+              <img className='ReleaseCover' alt='Release Cover' src={releaseInfo.cover} />
             </Row>
             <Conditional condition={releaseInfo.info !== undefined}>
               <Row>
