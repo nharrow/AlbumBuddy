@@ -35,7 +35,9 @@ function TrackList ({
           ? <b>{trackInfo.title}</b>
           : trackInfo.title
 
-      const DownloadLinks = trackInfo.downloads.map((trackFile, idx) => {
+      const downloads = trackInfo.downloads || []
+
+      const DownloadLinks = downloads.map((trackFile, idx) => {
         const trackFileExtension = trackFile.split('.').slice(-1)[0].toUpperCase()
         const trackFileName = trackFile.split('/').slice(-1)[0]
 
@@ -52,7 +54,9 @@ function TrackList ({
               {trackTitle}
             </Col>
             <Col xs={12} sm={12} md={12} lg={4}>
-              <span className="pull-right"><FontAwesomeIcon icon={['fa', 'download']} />&nbsp;{DownloadLinks}</span>
+              <Conditional condition={downloads.length > 0}>
+                <span className="pull-right"><FontAwesomeIcon icon={['fa', 'download']} />&nbsp;{DownloadLinks}</span>
+              </Conditional>
             </Col>
           </Row>
           <Conditional condition={trackInfo.info !== undefined}>
